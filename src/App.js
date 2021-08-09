@@ -10,6 +10,7 @@ import {
 import Header from './components/Header'
 import Home from './components/Index'
 import Country from './components/Country'
+import Loading from './components/Loading'
 
 function App() {
 
@@ -20,17 +21,18 @@ function App() {
     .then(response => setResults(response))
   }, []);
 
-  useEffect(() => {
-    console.log(results)
-  }, [results]);
-
   return (
     <Router>
-      <Header/>
-      <Switch>
-        <Route exact path="/"> <Home results/> </Route>
-        <Route exact path="/:country"> <Country results/> </Route>
-      </Switch>
+      <Header />
+      {
+        results === null ?
+        <Loading />
+        :
+        <Switch>
+          <Route exact path="/"> <Home data={results.data}/> </Route>
+          <Route exact path="/:country"> <Country data={results.data}/> </Route>
+        </Switch>
+      }
     </Router>
   );
 }
