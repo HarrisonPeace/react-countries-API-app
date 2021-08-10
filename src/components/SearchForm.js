@@ -1,22 +1,30 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  useHistory
+} from "react-router-dom";
 
-const SearchForm = () => {
+
+const SearchForm = ({ perPage }) => {
+  //Create history reference
+  let history = useHistory();
+
+  const [searchTerm, setSearchTerm] = useState(""); //set search term
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSearch(this.query.value); //request photos of search term from Flickr
-    this.props.history.push(`/search/${this.query.value.replace(/ /g, "-")}`); //Update current URL to reflect search term
-    e.currentTarget.reset();
+    history.push(`/?perPage=${perPage}&page=0&search=${searchTerm.toLowerCase()}`); //Update current URL to reflect search term
+    setSearchTerm('')
   };
 
   return (
-    <form className="search-form" onSubmit={this.handleSubmit}>
+    <form className="search-form" onSubmit={handleSubmit}>
       <input
         type="search"
         name="search"
         placeholder="Search"
         required
-        ref={(input) => (this.query = input)}
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
       <button type="submit" className="search-button">
         <svg
@@ -34,4 +42,4 @@ const SearchForm = () => {
   );
 };
 
-export default withRouter(SearchForm);
+export default SearchForm;
