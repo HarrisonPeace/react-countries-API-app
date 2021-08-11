@@ -1,4 +1,93 @@
-/* global.css */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
+/* ------ Global Styles ------ */
 * {
     box-sizing: border-box;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ------ Variables ------ */
+:root {
+    --elements-color: hsl(0, 0%, 100%); /*(Dark: hsl(209, 23%, 22%))*/
+    --background-color: hsl(0, 0%, 98%); /*(Dark: hsl(207, 26%, 17%))*/
+    --text-color: hsl(200, 15%, 8%); /*(Dark : hsl(0, 0%, 100%))*/
+    --input-color: hsl(0, 0%, 52%); /*(Light Mode Input)*/
+}
+
+/* ------ Header ------ */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 16px;
+}
+
+header h1 {
+    margin-right: auto;
+}
+
+/* ------ main Container ------ */
+main {
+    padding: 0 16px;
+}
+
+/* ------ Search Bar ------ */
+
+.search-form {
+    display: flex;
+}
+
+.search-form input {
+    flex-grow: 2;
+}
+
+/* ------ Options Bar ------ */
+#options-bar {
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ------ Country Container ------ */
+
+.country-container {
+    margin: 24px;
+    background-color: var(--elements-color);
+    border-radius: 6px;
+}
+
+.country-container img {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+}
+
+.text-container {
+    color: var(--text-color);
+    padding: 16px;
+}
+
+.text-container h1 {
+    font-weight: 800;
+    margin-bottom: 12px;
+    margin-top: 8px;
+}
+
+.text-container > span {
+    margin: 4px 0;
+    display: inline-block;
+    font-size: 14px;
+    width: 100%;
+}
+
+.text-container span span {
+    font-weight: 600;
 }

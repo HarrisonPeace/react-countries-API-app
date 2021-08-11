@@ -18,14 +18,6 @@ const SearchForm = ({ perPage }) => {
 
   return (
     <form className="search-form" onSubmit={handleSubmit}>
-      <input
-        type="search"
-        name="search"
-        placeholder="Search"
-        required
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
       <button type="submit" className="search-button">
         <svg
           fill="#fff"
@@ -38,6 +30,15 @@ const SearchForm = ({ perPage }) => {
           <path d="M0 0h24v24H0z" fill="none" />
         </svg>
       </button>
+      <input
+        type="search"
+        name="search"
+        placeholder="Search"
+        required
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
     </form>
   );
 };
