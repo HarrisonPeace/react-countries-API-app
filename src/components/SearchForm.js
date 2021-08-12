@@ -33,7 +33,7 @@ const SearchForm = ({ perPage }) => {
       <input
         type="search"
         name="search"
-        placeholder="Search"
+        placeholder="Search for a country..."
         required
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}

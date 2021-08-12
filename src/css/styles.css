@@ -1,93 +1,197 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
-
-/* ------ Global Styles ------ */
-* {
-    box-sizing: border-box;
-    font-family: 'Nunito Sans', sans-serif;
-}
-
-body {
-    font-family: 'Nunito Sans', sans-serif;
-}
-
-a {
-    text-decoration: none;
-}
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
 
 /* ------ Variables ------ */
 :root {
-    --elements-color: hsl(0, 0%, 100%); /*(Dark: hsl(209, 23%, 22%))*/
-    --background-color: hsl(0, 0%, 98%); /*(Dark: hsl(207, 26%, 17%))*/
-    --text-color: hsl(200, 15%, 8%); /*(Dark : hsl(0, 0%, 100%))*/
-    --input-color: hsl(0, 0%, 52%); /*(Light Mode Input)*/
+  --elements-color: hsl(0, 0%, 100%); /*(Dark: hsl(209, 23%, 22%))*/
+  --background-color: hsl(0, 0%, 98%); /*(Dark: hsl(207, 26%, 17%))*/
+  --text-color: hsl(200, 15%, 8%); /*(Dark : hsl(0, 0%, 100%))*/
+  --input-color: hsl(0, 0%, 52%); /*(Light Mode Input)*/
+  --inner-svg-moon: hsl(0, 0%, 98%); /*(Light Mode Input)*/
+}
+
+/* ------ Global Styles ------ */
+* {
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+  background-color: var(--background-color);
+}
+
+a {
+  text-decoration: none;
 }
 
 /* ------ Header ------ */
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 16px;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+header div {
+  display: flex;
+  align-items: center;
 }
 
 header h1 {
-    margin-right: auto;
+  margin-right: auto;
+  font-weight: 800;
+}
+
+header svg {
+  width: 18px;
+  margin-right: 5px;
+  margin-bottom: 1px;
+  fill: var(--text-color);
+}
+
+header span {
+  font-weight: 600;
 }
 
 /* ------ main Container ------ */
 main {
-    padding: 0 16px;
+  padding: 0 16px;
 }
 
 /* ------ Search Bar ------ */
 
 .search-form {
-    display: flex;
+  display: flex;
 }
 
 .search-form input {
-    flex-grow: 2;
+  flex-grow: 2;
+  background-color: var(--elements-color);
+  border: none;
+  padding: 16px 8px;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+}
+
+.search-form button {
+  background-color: var(--elements-color);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px 0 0 8px;
+}
+
+.search-form svg {
+  fill: var(--text-color);
+}
+
+::placeholder {
+  color: var(--text-color);
 }
 
 /* ------ Options Bar ------ */
 #options-bar {
-    padding: 24px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
+#options-bar .custom-select {
+    padding: 24px 0;
+    padding: 8px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background-color: var(--elements-color);
+    color: var(--text-color);
+    font-size: 14px;
+    width: 48%;
+}
+
+.custom-select {
+    position: relative;
+  }
+  
+  .custom-select select {
+    display: none; /*hide original SELECT element: */
+  }
+  
+  .select-selected {
+    background-color: var(--elements-color);
+  }
+  
+  /* Style the arrow inside the select element: */
+  .select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+  }
+  
+  /* style the items (options), including the selected item: */
+  .select-items div,.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  /* Style items (options): */
+  .select-items {
+    position: absolute;
+    background-color: var(--elements-color);
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }
+  
+  /* Hide the items when the select box is closed: */
+  .select-hide {
+    display: none;
+  }
+  
+  .select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 
 /* ------ Country Container ------ */
 
 .country-container {
-    margin: 24px;
-    background-color: var(--elements-color);
-    border-radius: 6px;
+  margin: 24px;
+  background-color: var(--elements-color);
+  border-radius: 6px;
 }
 
 .country-container img {
-    width: 100%;
-    border-radius: 6px 6px 0 0;
+  width: 100%;
+  border-radius: 6px 6px 0 0;
 }
 
 .text-container {
-    color: var(--text-color);
-    padding: 16px;
+  color: var(--text-color);
+  padding: 16px;
 }
 
 .text-container h1 {
-    font-weight: 800;
-    margin-bottom: 12px;
-    margin-top: 8px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  margin-top: 8px;
 }
 
 .text-container > span {
-    margin: 4px 0;
-    display: inline-block;
-    font-size: 14px;
-    width: 100%;
+  margin: 4px 0;
+  display: inline-block;
+  font-size: 14px;
+  width: 100%;
 }
 
 .text-container span span {
-    font-weight: 600;
+  font-weight: 600;
 }

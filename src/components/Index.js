@@ -4,6 +4,7 @@ import { useHistory, useLocation, Link } from "react-router-dom";
 import PerPage from "./PerPage";
 import SearchFrom from "./SearchForm";
 import Pages from "./Pages";
+import FilterByRegion from './FilterByRegion'
 
 const queryString = require("query-string");
 
@@ -49,21 +50,13 @@ const Index = ({ data }) => {
           search={search}
           setCurrentPage={setCurrentPage}
         />
-        <select>
-          <option hidden>Filter By Region</option>
-          <option>Africa</option>
-          <option>America</option>
-          <option>Asia</option>
-          <option>Europe</option>
-          <option>Oceania</option>
-        </select>
+        <FilterByRegion/>
       </div>
-
       {filteredData.map((country) => (
         <Link key={country.name} to={`/${country.name.toLowerCase()}`}>
           <div className="country-container">
             <img src={country.flag} alt={`${country.name}'s Flag`} />
-            <div class="text-container">
+            <div className="text-container">
               <h1>{country.name}</h1>
               <span><span>Population:</span> {country.population}</span>
               <span><span>Region:</span> {country.region}</span>
