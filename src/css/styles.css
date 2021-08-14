@@ -32,6 +32,7 @@ header {
   padding: 24px 16px;
   font-size: 14px;
   color: var(--text-color);
+  background-color: var(--elements-color);
 }
 
 header div {
@@ -64,6 +65,7 @@ main {
 
 .search-form {
   display: flex;
+  margin-top: 27px;
 }
 
 .search-form input {
@@ -92,81 +94,81 @@ main {
 
 /* ------ Options Bar ------ */
 #options-bar {
-  padding: 24px 0;
+  padding-top: 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 #options-bar .custom-select {
-    padding: 24px 0;
-    padding: 8px;
-    border: none;
-    outline: none;
-    border-radius: 8px;
-    background-color: var(--elements-color);
-    color: var(--text-color);
-    font-size: 14px;
-    width: 48%;
+  padding: 8px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background-color: var(--elements-color);
+  color: var(--text-color);
+  font-size: 14px;
+  width: 48%;
 }
 
 .custom-select {
-    position: relative;
-  }
-  
-  .custom-select select {
-    display: none; /*hide original SELECT element: */
-  }
-  
-  .select-selected {
-    background-color: var(--elements-color);
-  }
-  
-  /* Style the arrow inside the select element: */
-  .select-selected:after {
-    position: absolute;
-    content: "";
-    top: 14px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-color: #fff transparent transparent transparent;
-  }
-  
-  /* style the items (options), including the selected item: */
-  .select-items div,.select-selected {
-    color: #ffffff;
-    padding: 8px 16px;
-    border: 1px solid transparent;
-    cursor: pointer;
-  }
-  
-  /* Style items (options): */
-  .select-items {
-    position: absolute;
-    background-color: var(--elements-color);
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 99;
-  }
-  
-  /* Hide the items when the select box is closed: */
-  .select-hide {
-    display: none;
-  }
-  
-  .select-items div:hover, .same-as-selected {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+  position: relative;
+}
+
+.custom-select svg {
+  position: absolute;
+  width: 7px;
+  right: 14px;
+  top: 21px;
+  transform: rotate(180deg);
+  fill: var(--text-color);
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: var(--elements-color);
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,
+.select-selected {
+  color: var(--text-color);
+  padding: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: var(--elements-color);
+  top: 111%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border-radius: 8px;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
 
 /* ------ Country Container ------ */
 
 .country-container {
-  margin: 24px;
+  margin: 45px 24px;
   background-color: var(--elements-color);
   border-radius: 6px;
+  padding-bottom: 18px;
 }
 
 .country-container img {
@@ -194,4 +196,51 @@ main {
 
 .text-container span span {
   font-weight: 600;
+}
+
+.buttons-container {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 44px;
+  color: var(--text-color);
+}
+
+.buttons-container button {
+    border: none;
+    color: var(--text-color);
+    background: var(--background-color);
+    padding: 16px;
+    border-radius: 51%;
+    width: 50px;
+}
+
+.buttons-container svg {
+  width: 40px;
+  fill: var(--text-color);
+  transform: rotate(-90deg);
+  padding: 16px;
+}
+
+.buttons-container svg:first-child {
+  transform: rotate(-90deg);
+}
+
+.buttons-container svg:last-child {
+  transform: rotate(90deg);
+}
+
+.hide-button {
+  display: none;
+}
+
+.disable-button {
+  opacity: 0%;
+}
+
+
+.buttons-container .current-page {
+  background-color: var(--elements-color);
+  border-radius: 50%;
 }

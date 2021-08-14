@@ -3,8 +3,9 @@ import {
   useHistory
 } from "react-router-dom";
 
+const queryString = require("query-string");
 
-const SearchForm = ({ perPage }) => {
+const SearchForm = ({ query }) => {
   //Create history reference
   let history = useHistory();
 
@@ -12,7 +13,11 @@ const SearchForm = ({ perPage }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    history.push(`/?perPage=${perPage}&page=0&search=${searchTerm.toLowerCase()}`); //Update current URL to reflect search term
+    query.search = searchTerm.toLowerCase()
+    history.push({
+      pathname: '/',
+      search: queryString.stringify(query),
+    })
     setSearchTerm('')
   };
 

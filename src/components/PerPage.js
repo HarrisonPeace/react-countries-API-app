@@ -3,16 +3,19 @@ import { useHistory } from "react-router-dom";
 
 import CustomSelect from "./CustomSelect";
 
-function PerPage({ setResultsPP, search, setCurrentPage }) {
+const queryString = require("query-string");
+
+function PerPage({ query }) {
   //Create history reference
   let history = useHistory();
 
   const setItemsPerPage = (ItemsPerPage) => {
-    setResultsPP(ItemsPerPage);
-    setCurrentPage(0);
-    history.push(
-      `/?perPage=${ItemsPerPage}&page=0${search ? `&search=` + search : ""}`
-    ); //Update current URL to reflect page selected
+    query.perPage = ItemsPerPage;
+    query.page = 1;
+    history.push({
+      pathname: '/',
+      search: queryString.stringify(query),
+    })
   };
 
   const selectOptions = {

@@ -1,78 +1,73 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useLocation, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 import PerPage from "./PerPage";
 import SearchFrom from "./SearchForm";
 import Pages from "./Pages";
-import FilterByRegion from './FilterByRegion'
+import FilterByRegion from "./FilterByRegion";
+
+import filterResults from "./filter-results";
+import formatResults from "./format-results";
 
 const queryString = require("query-string");
 
 //Index Component
 const Index = ({ data }) => {
-  //Create history reference
-  let history = useHistory();
+  //Create location reference
   let location = useLocation();
 
-  const parsed = queryString.parse(location.search);
-  parsed.perPage = parseInt(parsed.perPage, { parseNumbers: true });
-  parsed.page = parseInt(parsed.page);
-  let { perPage, page, search } = parsed;
+  const query = queryString.parse(location.search);
+  query.perPage = parseInt(query.perPage || 10);
+  query.page = parseInt(query.page || 1);
+  let { search, region, perPage, page } = query;
 
-  if (perPage < 25) perPage = 25;
-  if (perPage > 25 && perPage < 50) perPage = 50;
-  if ((perPage > 50 && perPage < 100) || perPage > 100) perPage = 100;
+  const [totalPages, setTotalPages] = useState(1);
+  const [formattedData, setFormattedData] = useState(null);
 
-  const [resultsPP, setResultsPP] = useState(perPage || 25); //set results per page
-  const [currentPage, setCurrentPage] = useState(page || 0); //set current per page
+  useEffect(() => {
+    let filteredData = filterResults(data, search, region);
+    setFormattedData(formatResults(filteredData, setTotalPages, perPage));
+  }, [data, region, perPage, search]);
 
-  let startSlice = currentPage * resultsPP;
-  let endSlice = (currentPage + 1) * resultsPP;
-  let filteredData;
-  let pages;
-
-  if (search) {
-    filteredData = data
-      .filter((country) => country.name.toLowerCase().includes(search))
-      .slice(startSlice, endSlice);
-    pages = filteredData.length / resultsPP;
+  if (!formattedData) {
+    return <div>Loading</div>;
   } else {
-    filteredData = data.slice(startSlice, endSlice);
-    pages = data.length / resultsPP;
-  }
-
-  return (
-    <main>
-        <SearchFrom perPage={perPage || 25} />
+    return (
+      <main>
+        <SearchFrom query={query} />
         <div id="options-bar">
-        <PerPage
-          setResultsPP={setResultsPP}
-          search={search}
-          setCurrentPage={setCurrentPage}
-        />
-        <FilterByRegion/>
-      </div>
-      {filteredData.map((country) => (
-        <Link key={country.name} to={`/${country.name.toLowerCase()}`}>
-          <div className="country-container">
-            <img src={country.flag} alt={`${country.name}'s Flag`} />
-            <div className="text-container">
-              <h1>{country.name}</h1>
-              <span><span>Population:</span> {country.population}</span>
-              <span><span>Region:</span> {country.region}</span>
-              <span><span>Capital:</span> {country.capital}</span>
+          <PerPage query={query} />
+          <FilterByRegion query={query} />
+        </div>
+        {formattedData[page - 1].map((country) => (
+          <Link
+            key={country.name}
+            to={`/country/${country.name.toLowerCase()}`}
+          >
+            <div className="country-container">
+              <img src={country.flag} alt={`${country.name}'s Flag`} />
+              <div className="text-container">
+                <h1>{country.name}</h1>
+                <span>
+                  <span>Population:</span> {country.population}
+                </span>
+                <span>
+                  <span>Region:</span> {country.region}
+                </span>
+                <span>
+                  <span>Capital:</span> {country.capital}
+                </span>
+              </div>
             </div>
-          </div>
-        </Link>
-      ))}
-      <Pages
-        pages={pages}
-        resultsPP={resultsPP}
-        search={search}
-        setCurrentPage={setCurrentPage}
-      />
-    </main>
-  );
+          </Link>
+        ))}
+        <Pages
+          query={query}
+          totalPages={totalPages}
+        />
+      </main>
+    );
+  }
 };
 
 export default Index;

@@ -30,7 +30,7 @@ function App() {
         :
         <Switch>
           <Route exact path="/"> <Home data={results.data}/> </Route>
-          <Route exact path="/:countryName"> <Country data={results.data}/> </Route>
+          <Route path="/country/:countryName"> <Country data={results.data}/> </Route>
         </Switch>
       }
     </Router>
