@@ -8,6 +8,7 @@ import FilterByRegion from "./FilterByRegion";
 
 import filterResults from "./filter-results";
 import formatResults from "./format-results";
+import Loading from "./Loading";
 
 const queryString = require("query-string");
 
@@ -17,7 +18,7 @@ const Index = ({ data }) => {
   let location = useLocation();
 
   const query = queryString.parse(location.search);
-  query.perPage = parseInt(query.perPage || 10);
+  query.perPage = parseInt(query.perPage || 12);
   query.page = parseInt(query.page || 1);
   let { search, region, perPage, page } = query;
 
@@ -29,42 +30,49 @@ const Index = ({ data }) => {
     setFormattedData(formatResults(filteredData, setTotalPages, perPage));
   }, [data, region, perPage, search]);
 
-  if (!formattedData) {
-    return <div>Loading</div>;
+  if (formattedData === null) {
+    return <Loading />;
   } else {
     return (
       <main>
-        <SearchFrom query={query} />
-        <div id="options-bar">
-          <PerPage query={query} />
-          <FilterByRegion query={query} />
+        <div id="search-options-container">
+          <SearchFrom query={query} />
+          <div id="options-bar">
+            <PerPage query={query} />
+            <FilterByRegion query={query} />
+          </div>
         </div>
-        {formattedData[page - 1].map((country) => (
-          <Link
-            key={country.name}
-            to={`/country/${country.name.toLowerCase()}`}
-          >
-            <div className="country-container">
-              <img src={country.flag} alt={`${country.name}'s Flag`} />
-              <div className="text-container">
-                <h1>{country.name}</h1>
-                <span>
-                  <span>Population:</span> {country.population}
-                </span>
-                <span>
-                  <span>Region:</span> {country.region}
-                </span>
-                <span>
-                  <span>Capital:</span> {country.capital}
-                </span>
-              </div>
+        {
+          formattedData.length === 0 ?
+          <div className="not-found">
+        <h2>Sorry no results where found</h2>
+        <p>Please try again.</p>
+      </div> :
+      <>
+      <div className="countries-container">
+          {formattedData[page - 1].map((country) => (
+            <div className="country-container" key={country.name}>
+              <Link to={`/country/${country.alpha3Code.toLowerCase()}`}>
+                <img src={country.flag} alt={`${country.name}'s Flag`} />
+                <div className="text-container">
+                  <h1>{country.name}</h1>
+                  <span>
+                    <span>Population:</span> {country.population}
+                  </span>
+                  <span>
+                    <span>Region:</span> {country.region}
+                  </span>
+                  <span>
+                    <span>Capital:</span> {country.capital}
+                  </span>
+                </div>
+              </Link>
             </div>
-          </Link>
-        ))}
-        <Pages
-          query={query}
-          totalPages={totalPages}
-        />
+          ))}
+        </div>
+        <Pages query={query} totalPages={totalPages} />
+        </>
+        }
       </main>
     );
   }

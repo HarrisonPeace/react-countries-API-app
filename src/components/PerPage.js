@@ -21,7 +21,7 @@ function PerPage({ query }) {
   const selectOptions = {
     id: "per-page",
     placeholder: 'Items per page',
-    options: ['10', '25', '50', '100']
+    options: ['12', '24', '48']
   }
 
   return (

@@ -1,6 +1,6 @@
 function formatResults( filteredData, setTotalPages, resultsPP ) {
 
-  let TotalPages = filteredData.length / resultsPP;
+  let TotalPages = Math.ceil(filteredData.length / resultsPP);
   let formattedData = [];
 
   for (let i = 0; i < TotalPages; i++) {

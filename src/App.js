@@ -1,38 +1,59 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
-
-import Header from './components/Header'
-import Home from './components/Index'
-import Country from './components/Country'
-import Loading from './components/Loading'
+import Header from "./components/Header";
+import Home from "./components/Index";
+import Country from "./components/Country";
+import Loading from "./components/Loading";
+import Error from "./components/Error_Unhandled";
+import NotFound from "./components/NotFound";
+import ErrorBoundary from "./components/Error_Boundary";
 
 function App() {
-
   let [results, setResults] = useState(null);
+  let [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get(`https://restcountries.eu/rest/v2/all`)
-    .then(response => setResults(response))
+    axios
+      .get(`https://restcountries.eu/rest/v2/alld`)
+      .then((response) => setResults(response))
+      .catch((e) => setError(true));
   }, []);
 
   return (
     <Router>
       <Header />
-      {
-        results === null ?
-        <Loading />
-        :
-        <Switch>
-          <Route exact path="/"> <Home data={results.data}/> </Route>
-          <Route path="/country/:countryName"> <Country data={results.data}/> </Route>
-        </Switch>
-      }
+      <ErrorBoundary>
+        {error ? (
+          <Error />
+        ) : (
+          <>
+            {results === null ? (
+              <Loading />
+            ) : (
+              <Switch>
+                <Route exact path="/">
+                  {" "}
+                  <Home data={results.data} />{" "}
+                </Route>
+                <Route path="/country/:countryCode">
+                  {" "}
+                  <Country data={results.data} />{" "}
+                </Route>
+                <Route exact path="/">
+                  {" "}
+                  <Home data={results.data} />{" "}
+                </Route>
+                <Route>
+                  {" "}
+                  <NotFound />{" "}
+                </Route>
+              </Switch>
+            )}
+          </>
+        )}
+      </ErrorBoundary>
     </Router>
   );
 }

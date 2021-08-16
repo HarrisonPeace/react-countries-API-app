@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const queryString = require("query-string");
@@ -11,57 +11,6 @@ function Pages({ query, totalPages }) {
 
   const [pageButtonsState, setPageButtonsState] = useState(null);
   const [svgButtonsState, setSvgButtonsState] = useState(null);
-
-  // const setButtons = () => {
-  //   if (totalPages <= 5) {
-  //     for (let i = 0; i < 5; i++) {
-  //       if (i <= totalPages) {
-  //         pageButtons[i].page = i + 1;
-  //         pageButtons[i].className = "";
-  //         if (i + 1 === page) {
-  //           pageButtons[i].className = "current-page";
-  //         }
-  //       } else {
-  //         pageButtons[i].className = "hide-button";
-  //       }
-  //       svgButtons[0].className = "disable-button";
-  //       svgButtons[1].className = "disable-button";
-  //     }
-  //   } else {
-  //     if (page < totalPages - 2) {
-  //       for (let i = 0; i < 5; i++) {
-  //         let value;
-  //         if (i === 3) value = "...";
-  //         else if (i === 4) value = totalPages;
-  //         else value = page + i;
-  //         pageButtons[i].page = value;
-  //         pageButtons[i].className = "";
-  //       }
-  //       pageButtons[0].className = "current-page";
-  //       if (page === 1) {
-  //         svgButtons[0].className = "disable-button";
-  //         svgButtons[1].className = "";
-  //       } else {
-  //         svgButtons[0].className = "";
-  //         svgButtons[1].className = "";
-  //       }
-  //     } else {
-  //       for (let i = 0; i < 5; i++) {
-  //         let value;
-  //         if (i === 3) value = "...";
-  //         else if (i === 4) value = 1;
-  //         else value = 25 - i;
-  //         pageButtons[4 - i].page = value;
-  //         pageButtons[4 - i].className = "";
-  //         if (pageButtons[4 - i].page === page) {
-  //           pageButtons[4 - i].className = "current-page";
-  //         }
-  //       }
-  //       svgButtons[0].className = "";
-  //       svgButtons[1].className = "disable-button";
-  //     }
-  //   }
-  // };
 
   const pageContainerClick = (e) => {
     let pageButtons = JSON.parse(JSON.stringify(pageButtonsState));
@@ -77,50 +26,68 @@ function Pages({ query, totalPages }) {
         pathname: "/",
         search: queryString.stringify(query),
       });
-    } else if (
-      e.target.nodeName === "svg" || e.target.nodeName === "path"
-    ) {
-      if (e.target.id === "forewords" && svgButtons[1].className !== "disable-button") {
-        if (pageButtons[0].page < totalPages - 2) {
+    } else if (e.target.nodeName === "svg" || e.target.nodeName === "path") {
+      if (
+        e.target.id === "forewords" &&
+        svgButtons[1].className !== "disable-button"
+      ) {
+        if (pageButtons[0].page < totalPages - 5) {
+          pageButtons[4].page = totalPages;
+          pageButtons[3].page = "...";
+          pageButtons[3].className = "";
           for (let i = 0; i < 3; i++) {
-              pageButtons[i].page = pageButtons[i].page + 1;
-              if(pageButtons[i].page === page) {
-                pageButtons[i].className = "current-page";
-              } else {
-                pageButtons[i].className = "";
-              }
+            pageButtons[i].page = pageButtons[i].page + 1;
+            if (pageButtons[i].page === page) {
+              pageButtons[i].className = "current-page";
+            } else {
+              pageButtons[i].className = "";
+            }
+          }
+        } else {
+          for (let i = 0; i < 5; i++) {
+            pageButtons[4 - i].page = totalPages - i;
+            if (pageButtons[4 - i].page === page) {
+              pageButtons[4 - i].className = "current-page";
+            } else {
+              pageButtons[4 - i].className = "";
+            }
           }
         }
-      } else if (svgButtons[0].className !== "disable-button"){
-        if (pageButtons[0].page < totalPages - 2) {
+      } else if (
+        e.target.id === "backwards" &&
+        svgButtons[0].className !== "disable-button"
+      ) {
+        if (pageButtons[0].page < totalPages - 3) {
+          pageButtons[4].page = totalPages;
+          pageButtons[3].page = "...";
+          pageButtons[3].className = "";
           for (let i = 0; i < 3; i++) {
-              pageButtons[i].page = pageButtons[i].page - 1;
-              if(pageButtons[i].page === page) {
-                pageButtons[i].className = "current-page";
-              } else {
-                pageButtons[i].className = "";
-              }
+            pageButtons[i].page = pageButtons[i].page - 1;
+            if (pageButtons[i].page === page) {
+              pageButtons[i].className = "current-page";
+            } else {
+              pageButtons[i].className = "";
+            }
           }
         }
       }
     }
 
-    if(pageButtons[0].page === 1) {
+    if (pageButtons[0].page === 1) {
       svgButtons[0].className = "disable-button";
     } else {
       svgButtons[0].className = "none";
     }
 
-    if(pageButtons[1].page === '...') {
+    if (pageButtons[3].page !== "...") {
       svgButtons[1].className = "disable-button";
     } else {
       svgButtons[1].className = "none";
     }
 
-    setPageButtonsState(pageButtons)
-    setSvgButtonsState(svgButtons)
+    setPageButtonsState(pageButtons);
+    setSvgButtonsState(svgButtons);
   };
-
 
   useEffect(() => {
     let pageButtons = [
@@ -161,10 +128,10 @@ function Pages({ query, totalPages }) {
         className: {},
       },
     ];
-  
+
     if (totalPages <= 5) {
       for (let i = 0; i < 5; i++) {
-        if (i <= totalPages) {
+        if (i < totalPages) {
           pageButtons[i].page = i + 1;
           pageButtons[i].className = "";
           if (i + 1 === page) {
@@ -177,7 +144,7 @@ function Pages({ query, totalPages }) {
         svgButtons[1].className = "disable-button";
       }
     } else {
-      if (page < totalPages - 2) {
+      if (page < totalPages - 4) {
         for (let i = 0; i < 5; i++) {
           let value;
           if (i === 3) value = "...";
@@ -196,11 +163,7 @@ function Pages({ query, totalPages }) {
         }
       } else {
         for (let i = 0; i < 5; i++) {
-          let value;
-          if (i === 3) value = "...";
-          else if (i === 4) value = 1;
-          else value = 25 - i;
-          pageButtons[4 - i].page = value;
+          pageButtons[4 - i].page = totalPages - i;
           pageButtons[4 - i].className = "";
           if (pageButtons[4 - i].page === page) {
             pageButtons[4 - i].className = "current-page";
@@ -210,12 +173,12 @@ function Pages({ query, totalPages }) {
         svgButtons[1].className = "disable-button";
       }
     }
-    setPageButtonsState(pageButtons)
-    setSvgButtonsState(svgButtons)
+    setPageButtonsState(pageButtons);
+    setSvgButtonsState(svgButtons);
   }, [setPageButtonsState, page, totalPages, setSvgButtonsState]);
 
-  if (pageButtonsState === null) {
-    return null
+  if (pageButtonsState === null  ||  totalPages <= 1) {
+    return null;
   } else {
     return (
       <div onClick={(e) => pageContainerClick(e)} className="buttons-container">
@@ -234,23 +197,38 @@ function Pages({ query, totalPages }) {
           c-20.4,20.4-20.4,53.6,0,74s53.6,20.4,74,0l154.2-154.2L397.7,376.1z"
           />
         </svg>
-  
-        <button className={pageButtonsState[0].className} key={pageButtonsState[0].id}>
+
+        <button
+          className={pageButtonsState[0].className}
+          key={pageButtonsState[0].id}
+        >
           {pageButtonsState[0].page}
         </button>
-        <button className={pageButtonsState[1].className} key={pageButtonsState[1].id}>
+        <button
+          className={pageButtonsState[1].className}
+          key={pageButtonsState[1].id}
+        >
           {pageButtonsState[1].page}
         </button>
-        <button className={pageButtonsState[2].className} key={pageButtonsState[2].id}>
+        <button
+          className={pageButtonsState[2].className}
+          key={pageButtonsState[2].id}
+        >
           {pageButtonsState[2].page}
         </button>
-        <button className={pageButtonsState[3].className} key={pageButtonsState[3].id}>
+        <button
+          className={pageButtonsState[3].className}
+          key={pageButtonsState[3].id}
+        >
           {pageButtonsState[3].page}
         </button>
-        <button className={pageButtonsState[4].className} key={pageButtonsState[4].id}>
+        <button
+          className={pageButtonsState[4].className}
+          key={pageButtonsState[4].id}
+        >
           {pageButtonsState[4].page}
         </button>
-  
+
         <svg
           className={svgButtonsState[1].className}
           id={svgButtonsState[1].id}
@@ -269,7 +247,6 @@ function Pages({ query, totalPages }) {
       </div>
     );
   }
-
 }
 
 export default Pages;

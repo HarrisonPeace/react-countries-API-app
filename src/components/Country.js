@@ -1,35 +1,102 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, useLocation, useParams, Link } from "react-router-dom";
+import React from "react";
+import { useParams, Link } from "react-router-dom";
+import NotFound from './NotFound'
 
 //Index Component
 const Index = ({ data }) => {
-  //Create history reference
-  let history = useHistory();
-  let location = useLocation();
+  let { countryCode } = useParams();
 
-  let { countryName } = useParams();
+  let countryData = data.filter((country) =>
+    country.alpha3Code.toLowerCase().includes(countryCode)
+  )[0];
 
-  let countryData = data.filter((country) => country.name.toLowerCase().includes(countryName))[0];
-
-  return (
-    <main>
-      <Link to="/">Back</Link>
+  if (!countryData) {
+    return <NotFound />;
+  } else { return (
+    <main id="country-details">
+      <Link className="button" to="/">
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          x="0px"
+          y="0px"
+          viewBox="0 0 330 330"
+        >
+          <path
+            id="XMLID_29_"
+            d="M100.606,100.606L150,51.212V315c0,8.284,6.716,15,15,15c8.284,0,15-6.716,15-15V51.212l49.394,49.394
+          C232.322,103.535,236.161,105,240,105c3.839,0,7.678-1.465,10.606-4.394c5.858-5.857,5.858-15.355,0-21.213l-75-75
+          c-5.857-5.858-15.355-5.858-21.213,0l-75,75c-5.858,5.857-5.858,15.355,0,21.213C85.251,106.463,94.749,106.463,100.606,100.606z"
+          />
+        </svg>
+        Back
+      </Link>
       <img src={countryData.flag} alt={`${countryData.name}'s Flag`} />
-      <div>
+      <div className="text-container">
         <h1>{countryData.name}</h1>
-        <h2>Native Name: {countryData.nativeName}</h2>
-        <h2>Population: {countryData.population}</h2>
-        <h2>Region: {countryData.region}</h2>
-        <h2>Sub Region: {countryData.subregion}</h2>
-        <h2>Capital: {countryData.capital}</h2>
-        <h2>Top Level Domain: {countryData.topLevelDomain[0]}</h2>
-        {/* <h2>Currencies: {countryData.currencies}</h2>
-        <h2>Languages: {countryData.languages}</h2> */}
+        <div>
+          <span>
+            <span>Native Name:</span> {countryData.nativeName}
+          </span>
+          <span>
+            <span>Population:</span> {countryData.population}
+          </span>
+          <span>
+            <span>Region:</span> {countryData.region}
+          </span>
+          <span>
+            <span>Sub Region:</span> {countryData.subregion}
+          </span>
+          <span>
+            <span>Capital:</span> {countryData.capital}
+          </span>
+        </div>
+        <div className="text-margin-top">
+          <span>
+            <span>Top Level Domain:</span> {countryData.topLevelDomain[0]}
+          </span>
+          <span>
+            <span>Currencies:</span>{" "}
+            {countryData.currencies.map((currency, i, a) => {
+              if (a.length === 0 || i === a.length - 1) return currency.name;
+              else return `${currency.name}, `;
+            })}
+          </span>
+          <span>
+            <span>Languages:</span>{" "}
+            {countryData.languages.map((language, i, a) => {
+              if (a.length === 0 || i === a.length - 1) return language.name;
+              else return `${language.name}, `;
+            })}
+          </span>
+        </div>
+        <div className="text-margin-top">
+          <span>
+            <span>Border Countries:</span>
+          </span>
+          <div className="border-countries-container">
+            {countryData.borders[0]
+              ? countryData.borders.map((border, i, a) => {
+                  let borderData = data.filter((country) =>
+                    country.alpha3Code.includes(border)
+                  )[0];
+                  return (
+                    <Link
+                      key={`button-${borderData.alpha3Code}`}
+                      className="button1"
+                      to={`/country/${borderData.alpha3Code.toLowerCase()}`}
+                    >
+                      {borderData.name || "N/A"}
+                    </Link>
+                  );
+                })
+              : "N/A"}
+          </div>
+        </div>
       </div>
-      <h2>Border Countries:</h2>
-      <Link to="/">Back</Link>
     </main>
-  );
+  );}
 };
 
 export default Index;

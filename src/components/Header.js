@@ -12,13 +12,15 @@ const Header = () => {
   --background-color: hsl(0, 0%, 98%);
   --text-color: hsl(200, 15%, 8%);
   --input-color: hsl(0, 0%, 52%);
-  --inner-svg-moon: hsl(0, 0%, 98%);`,
+  --search-button: hsl(0, 0%, 52%);
+  --box-shadow: hsl(0, 0%, 52%);`,
     dark: `
   --elements-color: hsl(209, 23%, 22%);
   --background-color: hsl(207, 26%, 17%);
   --text-color: hsl(0, 0%, 100%);
   --input-color: hsl(207, 26%, 17%);
-  --inner-svg-moon: hsl(0, 0%, 100%);`,
+  --search-button: hsl(0, 0%, 100%);
+  --box-shadow: hsl(207deg 38% 8%);`,
   };
 
   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
