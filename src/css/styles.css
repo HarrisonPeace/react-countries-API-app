@@ -437,7 +437,19 @@ main h1 {
 /* ============================================= */
 /*              Typography                       */
 /* ============================================= */
-*, header, main, #loading {
+*, header, main, #loading, ::-webkit-input-placeholder {
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--text-color);
+}
+*, header, main, #loading, :-ms-input-placeholder {
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--text-color);
+}
+*, header, main, #loading, ::-ms-input-placeholder {
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--text-color);
+}
+*, header, main, #loading, ::placeholder {
   font-family: "Nunito Sans", sans-serif;
   color: var(--text-color);
 }
@@ -456,6 +468,38 @@ a {
 /* ============================================= */
 .no-hover {
   pointer-events: none;
+}
+
+.stand-alone-button {
+  border: none;
+  padding: 8px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 117px;
+  margin: 30px 0 50px;
+  -webkit-box-shadow: 0px 0px 10px -5px var(--box-shadow);
+          box-shadow: 0px 0px 10px -5px var(--box-shadow);
+  background: var(--elements-color);
+  color: var(--text-color);
+}
+
+.border-button {
+  color: var(--text-color);
+  padding: 10px 28px;
+  background: var(--elements-color);
+  margin: 10px 10px 10px 0;
+  text-align: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-shadow: 0px 0px 10px -5px var(--box-shadow);
+          box-shadow: 0px 0px 10px -5px var(--box-shadow);
 }
 
 .buttons-container {
@@ -521,37 +565,6 @@ a {
 .current-page {
   background-color: var(--elements-color);
   border-radius: 50%;
-}
-
-.stand-alone-button {
-  padding: 8px 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  width: 117px;
-  margin: 30px 0 50px;
-  -webkit-box-shadow: 0px 0px 10px -5px var(--box-shadow);
-          box-shadow: 0px 0px 10px -5px var(--box-shadow);
-  background: var(--elements-color);
-  color: var(--text-color);
-}
-
-.border-button {
-  color: var(--text-color);
-  padding: 10px 28px;
-  background: var(--elements-color);
-  margin: 10px 10px 10px 0;
-  text-align: center;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-box-shadow: 0px 0px 10px -5px var(--box-shadow);
-          box-shadow: 0px 0px 10px -5px var(--box-shadow);
 }
 
 /* Scss Document */
@@ -620,8 +633,12 @@ main img {
 
 /* Scss Document */
 /* ============================================= */
-/*              Search Bar                       */
+/*               Custom Select                   */
 /* ============================================= */
+/* 
+-- Below code altered from w3schools
+-- I didn't use a HTML "select" element as the base so code would need to be adapted to work for submitting a form
+-- @URL: https://www.w3schools.com/HOWTO/howto_custom_select.asp */
 .custom-select {
   padding: 8px;
   border: none;
@@ -636,15 +653,6 @@ main img {
           box-shadow: 0px 0px 10px -5px var(--box-shadow);
 }
 
-@media (min-width: 768px) {
-  .custom-select {
-    width: 150px;
-  }
-  .custom-select:first-child {
-    margin-right: 14px;
-  }
-}
-
 .custom-select svg {
   position: absolute;
   width: 7px;
@@ -655,25 +663,23 @@ main img {
   fill: var(--text-color);
 }
 
-.custom-select select {
-  display: none;
-  /*hide original SELECT element: */
+@media (min-width: 768px) {
+  .custom-select {
+    width: 150px;
+  }
+  .custom-select:first-child {
+    margin-right: 14px;
+  }
 }
 
 .select-selected {
   background-color: var(--elements-color);
-}
-
-/* style the items (options), including the selected item: */
-.select-items div,
-.select-selected {
   color: var(--text-color);
   padding: 8px;
   border: 1px solid transparent;
   cursor: pointer;
 }
 
-/* Style items (options): */
 .select-items {
   position: absolute;
   background-color: var(--elements-color);
@@ -686,7 +692,13 @@ main img {
           box-shadow: 0px 0px 10px -5px var(--box-shadow);
 }
 
-/* Hide the items when the select box is closed: */
+.select-items div {
+  color: var(--text-color);
+  padding: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
 .select-hide {
   display: none;
 }
