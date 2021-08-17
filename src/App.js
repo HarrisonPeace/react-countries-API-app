@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Header from "./components/Header";
-import Home from "./components/Index";
-import Country from "./components/Country";
-import Loading from "./components/Loading";
-import Error from "./components/Error_Unhandled";
-import NotFound from "./components/NotFound";
-import ErrorBoundary from "./components/Error_Boundary";
+import Header from "./components/header";
+import Home from "./components/home";
+import Country from "./components/country-detail";
+import Loading from "./components/loading";
+import Error from "./components/error/error";
+import NotFound from "./components/error/not-found";
+import ErrorBoundary from "./components/error/error-boundary";
 
 function App() {
   let [results, setResults] = useState(null);
@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`https://restcountries.eu/rest/v2/alld`)
+      .get(`https://restcountries.eu/rest/v2/all`)
       .then((response) => setResults(response))
       .catch((e) => setError(true));
   }, []);

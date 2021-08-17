@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import NotFound from './NotFound'
+import NotFound from './error/not-found'
 
 //Index Component
 const Index = ({ data }) => {
@@ -14,7 +14,7 @@ const Index = ({ data }) => {
     return <NotFound />;
   } else { return (
     <main id="country-details">
-      <Link className="button" to="/">
+      <Link className="stand-alone-button" to="/">
         <svg
           version="1.1"
           id="Layer_1"
@@ -52,7 +52,7 @@ const Index = ({ data }) => {
             <span>Capital:</span> {countryData.capital}
           </span>
         </div>
-        <div className="text-margin-top">
+        <div className="container-margin-top">
           <span>
             <span>Top Level Domain:</span> {countryData.topLevelDomain[0]}
           </span>
@@ -71,7 +71,7 @@ const Index = ({ data }) => {
             })}
           </span>
         </div>
-        <div className="text-margin-top">
+        <div className="container-margin-top">
           <span>
             <span>Border Countries:</span>
           </span>
@@ -84,7 +84,7 @@ const Index = ({ data }) => {
                   return (
                     <Link
                       key={`button-${borderData.alpha3Code}`}
-                      className="button1"
+                      className="border-button"
                       to={`/country/${borderData.alpha3Code.toLowerCase()}`}
                     >
                       {borderData.name || "N/A"}

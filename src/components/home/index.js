@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 
-import PerPage from "./PerPage";
-import SearchFrom from "./SearchForm";
-import Pages from "./Pages";
-import FilterByRegion from "./FilterByRegion";
+import PerPage from "./custom-select/items-per-page";
+import SearchFrom from "./search-form";
+import Pages from "./pagination";
+import FilterByRegion from "./custom-select/filter-by-region";
 
-import filterResults from "./filter-results";
-import formatResults from "./format-results";
-import Loading from "./Loading";
+import filterResults from "../helpers/filter-results";
+import formatResults from "../helpers/format-results";
+import Loading from "../loading";
 
 const queryString = require("query-string");
 
@@ -44,7 +44,7 @@ const Index = ({ data }) => {
         </div>
         {
           formattedData.length === 0 ?
-          <div className="not-found">
+          <div className="not-found-error-container">
         <h2>Sorry no results where found</h2>
         <p>Please try again.</p>
       </div> :

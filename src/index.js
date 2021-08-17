@@ -6,9 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 //Import CSS
-import "./css/normalize.css";
-import "./css/reset.css";
-import "./css/styles.css";
+import "./css/styles.min.css";
 
 ReactDOM.render(
   <React.StrictMode>

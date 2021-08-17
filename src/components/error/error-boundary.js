@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 
 // Component Imports
-import Error from './Error_Unhandled'
+import Error from './error'
 
 class ErrorBoundary extends Component {
   constructor(props) {

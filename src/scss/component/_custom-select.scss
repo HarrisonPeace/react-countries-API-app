@@ -1,0 +1,69 @@
+/* Scss Document */
+
+/* ============================================= */
+/*               Custom Select                   */
+/* ============================================= */
+
+/* 
+-- Below code altered from w3schools
+-- I didn't use a HTML "select" element as the base so code would need to be adapted to work for submitting a form
+-- @URL: https://www.w3schools.com/HOWTO/howto_custom_select.asp */
+
+.custom-select {
+  padding: 8px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background-color: var(--elements-color);
+  color: var(--text-color);
+  font-size: 14px;
+  width: 48%;
+  position: relative;
+  box-shadow: 0px 0px 10px -5px var(--box-shadow);
+  svg {
+    position: absolute;
+    width: 7px;
+    right: 14px;
+    top: 21px;
+    transform: rotate(180deg);
+    fill: var(--text-color);
+  }
+  @include mq('tablet') {
+    width: 150px;
+    &:first-child {margin-right: 14px;}
+    }
+}
+
+.select-selected {
+  background-color: var(--elements-color);
+  color: var(--text-color);
+  padding: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.select-items {
+  position: absolute;
+  background-color: var(--elements-color);
+  top: 111%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px -5px var(--box-shadow);
+  div {
+    color: var(--text-color);
+    padding: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+}
+
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}

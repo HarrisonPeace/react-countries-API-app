@@ -1,0 +1,14 @@
+// Scss Document //
+
+/* ============================================= */
+/*              Typography                       */
+/* ============================================= */
+
+*, header, main, #loading, ::placeholder {
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--text-color)
+}
+
+a {
+  text-decoration: none;
+}

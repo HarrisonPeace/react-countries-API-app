@@ -1,0 +1,36 @@
+/* Scss Document */
+
+/* ============================================= */
+/*                 Header                        */
+/* ============================================= */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 16px;
+  font-size: 14px;
+  //color: var(--text-color);
+  background-color: var(--elements-color);
+  box-shadow: 0px 0px 10px -5px var(--box-shadow);
+  div {
+    display: flex;
+    align-items: center;
+  }
+  h1 {
+    margin-right: auto;
+    font-weight: 800;
+  }
+  svg {
+    width: 18px;
+    margin-right: 5px;
+    margin-bottom: 1px;
+    fill: var(--text-color);
+  }
+  span {
+    font-weight: 600;
+  }
+  @include mq('tablet') {
+    padding: 13px 50px;
+}
+}

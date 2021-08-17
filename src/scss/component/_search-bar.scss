@@ -1,0 +1,33 @@
+/* Scss Document */
+
+/* ============================================= */
+/*              Search Bar                       */
+/* ============================================= */
+#search-options-container {
+  margin-top: 44px;
+}
+
+.search-form {
+  display: flex;
+  box-shadow: 0px 0px 10px -5px var(--box-shadow);
+  input {
+    flex-grow: 2;
+    background-color: var(--elements-color);
+    border: none;
+    padding: 16px 8px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  button {
+    background-color: var(--elements-color);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px 0 0 8px;
+  }
+  svg {
+    fill: var(--search-button);
+  }
+  @include mq("tablet") {
+    width: 300px;
+  }
+}

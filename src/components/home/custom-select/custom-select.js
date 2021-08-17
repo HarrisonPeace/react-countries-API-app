@@ -1,3 +1,8 @@
+/* 
+-- Below code altered from w3schools
+-- I didn't use a HTML "select" element as the base so code would need to be adapted to work for submitting a form
+-- @URL: https://www.w3schools.com/HOWTO/howto_custom_select.asp */
+
 import React, { useRef } from "react";
 
 function CustomSelect({ selectOptions, selectedAction }) {

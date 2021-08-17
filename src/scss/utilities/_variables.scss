@@ -1,0 +1,28 @@
+// Scss Document //
+
+// ============================================= //
+//                  Variables                    //
+// ============================================= //
+
+//---------- Colors ----------//
+
+:root {
+  --elements-color: hsl(0, 0%, 100%); /*(Dark: hsl(209, 23%, 22%))*/
+  --background-color: hsl(0, 0%, 98%); /*(Dark: hsl(207, 26%, 17%))*/
+  --text-color: hsl(200, 15%, 8%); /*(Dark : hsl(0, 0%, 100%))*/
+  --input-color: hsl(0, 0%, 52%); /*(Light Mode Input)*/
+  --search-button: hsl(0, 0%, 52%);
+  --box-shadow: hsl(0, 0%, 52%);
+}
+
+//----------- Padding / Margin ----------//
+
+$std-padding          : 10px;
+$std-margin           : 10px;
+
+//------------ Break Points ------------//
+
+$breakpoint: (
+	'tablet'          : 768px,
+	'laptop'          : 1024px,
+);

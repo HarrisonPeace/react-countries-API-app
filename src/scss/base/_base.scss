@@ -1,0 +1,31 @@
+// Scss Document //
+
+/* ============================================= */
+/*              Base styles                      */
+/* ============================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+main {
+  padding: 0 16px;
+  h1 {
+    font-weight: 800;
+    margin-bottom: 12px;
+    margin-top: 8px;
+  }
+  @include mq("tablet") {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  @include mq("laptop") {
+    max-width: 1440px;
+    margin: auto;
+  }
+}
+

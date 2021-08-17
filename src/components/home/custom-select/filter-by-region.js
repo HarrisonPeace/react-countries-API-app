@@ -3,7 +3,7 @@ import {
   useHistory
 } from "react-router-dom";
 
-import CustomSelect from "./CustomSelect";
+import CustomSelect from "./custom-select";
 
 const queryString = require("query-string");
 
