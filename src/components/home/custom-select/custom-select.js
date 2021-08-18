@@ -1,15 +1,25 @@
 /* 
 -- Below code altered from w3schools
--- I didn't use a HTML "select" element as the base so code would need to be adapted to work for submitting a form
+-- I didn't use a HTML "select" element as the base so code would need to be adapted to work in a form
 -- @URL: https://www.w3schools.com/HOWTO/howto_custom_select.asp */
 
 import React, { useRef } from "react";
 
+/**
+ * @description A react function to create a return a custom select HTML object
+ * @param selectOptions = an object to become the select options @object {id, placeholder, options}
+ * @param selectedAction = a function to be called when a new option has been selected
+ * @returns react component
+ */
 function CustomSelect({ selectOptions, selectedAction }) {
   const customSelect = useRef(null);
   const selectedContainer = useRef(null);
   const optionsContainer = useRef(null);
 
+  /**
+   * @description Event listener to close the custom select when a click occurs anywhere outside of it
+   * @param e = event object
+   */
   window.addEventListener("click", (e) => {
     if (!e.target.closest(`#${selectOptions.id}`)) {
       if (optionsContainer.current !== null) {
@@ -20,6 +30,10 @@ function CustomSelect({ selectOptions, selectedAction }) {
     }
   });
 
+  /**
+   * @description onClick function - sets the clicked option as the selected option
+   * @param e = event object
+   */
   const optionClicked = (e) => {
     selectedContainer.current.innerHTML = e.target.innerHTML;
     optionsContainer.current.classList.add("select-hide");
@@ -28,6 +42,10 @@ function CustomSelect({ selectOptions, selectedAction }) {
     }
   };
 
+  /**
+   * @description onClick function - opens and closes the select options box
+   * @param e = event object
+   */
   const selectedContainerClick = (e) => {
     optionsContainer.current.classList.toggle("select-hide");
   };

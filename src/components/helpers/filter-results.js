@@ -1,3 +1,10 @@
+/**
+ * @description Filters data by a given search term and/or a region.
+ * @param data = data received from the country API in (array)
+ * @param search = search term provided by search from and query string (string)
+ * @param region = region (asia, america etc) provided by region custome select and query string (string)
+ * @Return filtered data
+ */
 function filterResults(data, search, region) {
   let filteredData;
   if (region && search) {

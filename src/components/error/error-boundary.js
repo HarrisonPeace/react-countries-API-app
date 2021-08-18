@@ -1,11 +1,10 @@
 /**
  * Error Boundary to catch react component mounting and other react errors
  */
-
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // Component Imports
-import Error from './error'
+import Error from "./error";
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -20,11 +19,9 @@ class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return <Error/> //if error show Error page
-    }
-
-    return this.props.children; 
+      return <Error />; //if error show Error page
+    } else return this.props.children;
   }
 }
 
-export default ErrorBoundary
+export default ErrorBoundary;
