@@ -10,6 +10,7 @@ This is a solution to the [REST Countries API with color theme switcher challeng
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
 - [Author](#author)
 
 
@@ -40,11 +41,19 @@ Users should be able to:
 ### Built with
 
 - Semantic HTML5 markup
-- CSS custom properties
+- SCSS custom properties
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
+
+### What I learned
+
+I used query-string in order to filter and format results passing react the variables to update via the URL.
+
+I added in pagination so that countries are shown in an easier format (rather seeing all 250 at once), this was done using reacts useCallback hook so that a function used both on click and on mount wouldn't be called continuously.
+
+SCSS was used to prepare for bigger projects.
 
 ## Author
 
