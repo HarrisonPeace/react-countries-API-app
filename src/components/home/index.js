@@ -43,7 +43,7 @@ const Index = ({ data }) => {
       <main>
         <div id="search-options-container">
           <SearchFrom query={query} />
-          <div id="options-bar-container ">
+          <div id="options-bar-container">
             <PerPage query={query} />
             <FilterByRegion query={query} />
           </div>
