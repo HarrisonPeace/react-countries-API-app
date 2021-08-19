@@ -1,24 +1,25 @@
 import React, { useState } from "react";
-import {
-  useHistory
-} from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 const queryString = require("query-string");
 
 const SearchForm = ({ query }) => {
   //Create history reference
   let history = useHistory();
 
-  const [searchTerm, setSearchTerm] = useState(""); //set search term
+  //set State
+  const [searchTerm, setSearchTerm] = useState("");
 
+  /**
+   * @description handle form submit, on submit set query search term and push to history to update index component
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
-    query.search = searchTerm.toLowerCase()
+    query.search = searchTerm.toLowerCase();
     history.push({
-      pathname: '/',
+      pathname: "/",
       search: queryString.stringify(query),
-    })
-    setSearchTerm('')
+    });
+    setSearchTerm("");
   };
 
   return (
@@ -43,7 +44,6 @@ const SearchForm = ({ query }) => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-
     </form>
   );
 };

@@ -7,17 +7,20 @@ const Index = ({ data }) => {
   //Create history reference
   let history = useHistory();
 
+  //get country alpha3Code from url
   let { countryCode } = useParams();
 
+  //filter through data and find matching country
   let countryData = data.filter((country) =>
     country.alpha3Code.toLowerCase().includes(countryCode)
   )[0];
 
+  //return not found component if no country found
   if (!countryData) {
     return <NotFound />;
   } else {
     return (
-      <main id="country-details">
+      <main id="country-details-container">
         <button className="stand-alone-button" onClick={() => history.goBack()}>
           <svg
             version="1.1"
@@ -62,13 +65,15 @@ const Index = ({ data }) => {
             </span>
             <span>
               <span>Currencies:</span>{" "}
+              {/* map of the country's currency's and return in JSX format */}
               {countryData.currencies.map((currency, i, a) => {
                 if (a.length === 0 || i === a.length - 1) return currency.name;
                 else return `${currency.name}, `;
               })}
             </span>
             <span>
-              <span>Languages:</span>{" "}
+              <span>Languages:</span>
+              {/* map of the country's languages and return in JSX format */}
               {countryData.languages.map((language, i, a) => {
                 if (a.length === 0 || i === a.length - 1) return language.name;
                 else return `${language.name}, `;
@@ -80,6 +85,7 @@ const Index = ({ data }) => {
               <span>Border Countries:</span>
             </span>
             <div className="border-countries-container">
+              {/* if the country has borders map over them returning a Link element */}
               {countryData.borders[0]
                 ? countryData.borders.map((border, i, a) => {
                     let borderData = data.filter((country) =>

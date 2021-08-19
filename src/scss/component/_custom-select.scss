@@ -28,10 +28,12 @@
     transform: rotate(180deg);
     fill: var(--text-color);
   }
-  @include mq('tablet') {
+  @include mq("tablet") {
     width: 150px;
-    &:first-child {margin-right: 14px;}
+    &:first-child {
+      margin-right: 14px;
     }
+  }
 }
 
 .select-selected {

@@ -27,7 +27,7 @@ const Index = ({ data }) => {
   const [formattedData, setFormattedData] = useState(null);
 
   /**
-   * @description filter and format the data to be show on the page by passing it through both the filterResults and formatResults helpers (see individual documents for how these work)
+   * @description filter and format the data to be show on the page by passing it through both the filterResults and formatResults helpers (see individual scripts for how these work)
    * @Return sets FormattedData state
    */
   useEffect(() => {
@@ -43,7 +43,7 @@ const Index = ({ data }) => {
       <main>
         <div id="search-options-container">
           <SearchFrom query={query} />
-          <div id="options-bar">
+          <div id="options-bar-container ">
             <PerPage query={query} />
             <FilterByRegion query={query} />
           </div>

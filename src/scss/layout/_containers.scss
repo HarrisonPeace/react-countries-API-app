@@ -67,7 +67,7 @@
   }
 }
 
-#loading {
+#loading-container {
   margin: 100px auto;
   width: 50%;
   text-align: center;
@@ -82,7 +82,7 @@
   }
 }
 
-#options-bar {
+#options-bar-container {
   padding-top: 44px;
   display: flex;
   align-items: center;
@@ -100,7 +100,7 @@
   }
 }
 
-#country-details {
+#country-details-container {
   svg {
     fill: var(--text-color);
     transform: rotate(-90deg);

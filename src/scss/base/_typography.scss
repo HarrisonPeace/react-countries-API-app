@@ -4,9 +4,13 @@
 /*              Typography                       */
 /* ============================================= */
 
-*, header, main, #loading, ::placeholder {
+*,
+header,
+main,
+#loading,
+::placeholder {
   font-family: "Nunito Sans", sans-serif;
-  color: var(--text-color)
+  color: var(--text-color);
 }
 
 a {
